@@ -11,10 +11,18 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule, MatSnackBar} from '@angular/material/snack-bar';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component'; 
-import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component'; 
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +30,7 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     HomeComponent,
     LoginComponent
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +41,14 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     MatButtonModule,
+    FormsModule,
+    MatTableModule,
+    HttpClientModule,
+    MatSnackBarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
