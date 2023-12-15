@@ -1,16 +1,23 @@
-<div class="login-container">
-    <h2>Login</h2>
-    <form>
-      <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" [(ngModel)]="username" name="username">
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" [(ngModel)]="password" name="password">
-      </div>
-      <button type="button" (click)="onLogin()">Login</button>
-      <button type="button" (click)="onCreateAccount()">Create New Account</button>
-    </form>
-  </div>
+<!-- login.component.html -->
+
+<div class="login">
+  <form class="custom-form" method="post">
+    <h1>Login</h1>
+    <input
+      type="text"
+      [(ngModel)]="nombre"
+      name="nombre"
+      placeholder="Nombre"
+      required="required"
+    />
+    <input
+      type="password"
+      [(ngModel)]="dni"
+      name="DNI"
+      placeholder="DNI"
+      required="required"
+    />
+    <button type="submit" (click)="login()">Log in</button>
+  </form>
+</div>
   

@@ -1,37 +1,36 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component } from "@angular/core";
+import { UsersService } from '../services/users.service';
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"],
 })
 export class LoginComponent {
-  username: string = '';
-  password: string = '';
-  private loginUrl = 'http://yourapi.com/login'; // Replace with your actual API URL
+  nombre: string = '';
+  dni: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private UserService: UsersService,
+    private snackbar: MatSnackBar,
+    private router: Router) {}
 
-  onLogin(): void {
-    // this.http.post(this.loginUrl, { username: this.username, password: this.password })
-    //   .subscribe({
-    //     next: (result) => {
-    //       console.log('Login successful', result);
-    //       // Handle successful login here (e.g., navigation, storing user data)
-    //     },
-    //     error: (error) => {
-    //       console.error('Login failed', error);
-    //       // Handle login errors here
-    //       // Example: Showing a snackbar/message to the user
-    //       // this.snackbar.open('Login failed. Please try again.', '', { duration: 3000 });
-    //     },
-    //     complete: () => console.log('Login request completed')
-    //   });
-  }
-  
-
-  onCreateAccount(): void {
-    // Handle account creation logic
+  login() {
+    this.UserService.login(this.dni).subscribe({
+      next: (data:any) => {
+        this.router.navigateByUrl('/home');
+          this.snackbar.open('Login exitoso', '', {
+          duration: 3000
+          });
+      },
+      error: (e: any) => {
+        this.snackbar.open('Login no existoso', '', {
+          duration: 3000
+        });
+      }
+    });
   }
 }
+
+
