@@ -29,7 +29,7 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
     ConfirmDialogComponent,
   ],
   imports: [
