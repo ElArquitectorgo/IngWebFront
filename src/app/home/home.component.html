@@ -15,6 +15,16 @@
       <mat-cell *matCellDef="let element" title="{{element.edad}}"> {{element.edad}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="cita">
+      <mat-header-cell *matHeaderCellDef> Cita </mat-header-cell>
+      <mat-cell *matCellDef="let element" title="{{element.cita}}"> {{element.cita}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dni">
+      <mat-header-cell *matHeaderCellDef> DNI </mat-header-cell>
+      <mat-cell *matCellDef="let element" title="{{element.dni}}"> {{element.dni}} </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="view">
       <mat-header-cell *matHeaderCellDef > View </mat-header-cell>
       <mat-cell *matCellDef="let element">            
