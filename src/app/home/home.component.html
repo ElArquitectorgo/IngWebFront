@@ -1,23 +1,13 @@
-<mat-table [dataSource]="dataSource" *ngIf="login">
-
+<div *ngIf="login">
+<mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
-        <mat-cell *matCellDef="let element" title="{{element.id}}">{{ element.id}} </mat-cell>
-      </ng-container>
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let element" title="{{element.id}}">{{ element.id}} </mat-cell>
+    </ng-container>
 
     <ng-container matColumnDef="nombre">
       <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
       <mat-cell *matCellDef="let element" title="{{element.nombre}}">{{ element.nombre}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="edad">
-      <mat-header-cell *matHeaderCellDef> Edad </mat-header-cell>
-      <mat-cell *matCellDef="let element" title="{{element.edad}}"> {{element.edad}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="cita">
-      <mat-header-cell *matHeaderCellDef> Cita </mat-header-cell>
-      <mat-cell *matCellDef="let element" title="{{element.cita}}"> {{element.cita}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="dni">
@@ -25,20 +15,13 @@
       <mat-cell *matCellDef="let element" title="{{element.dni}}"> {{element.dni}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="view">
-      <mat-header-cell *matHeaderCellDef > View </mat-header-cell>
-      <mat-cell *matCellDef="let element">            
-        <a mat-icon-button title="View/edit paciente" routerLink="/paciente/{{element.id}}">
-          <mat-icon color="primary">visibility</mat-icon>
-        </a>
-      </mat-cell>
-    </ng-container>
-
     <ng-container matColumnDef="delete">
       <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
       <mat-cell *matCellDef="let element">            
-        <button mat-icon-button title="Delete paciente" (click)="confirmDeletion(element.id)">
-          <mat-icon color="primary">delete</mat-icon>
+        <button mat-icon-button
+        title="Borrar paciente"
+        (click)="confirmDeletion($event, element.id)">
+          <mat-icon color = "warn">delete</mat-icon>
         </button>
       </mat-cell>
     </ng-container>
@@ -46,6 +29,20 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"
     [routerLink]="['/paciente', row.id]"
-    class="clickable-row">
+    class="clickable-row"
+    (mouseenter)="onMouseEnter(row)"
+    (mouseleave)="onMouseLeave(row)"
+    [ngStyle]="{ 'background-color': row.isHovered ? 'lightgray' : '' }">
     </mat-row>
 </mat-table>
+
+<div class="center-container">
+  <button mat-raised-button
+          title="Añadir paciente"
+          routerLink="/paciente/create"
+          class="add-button">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+</div>

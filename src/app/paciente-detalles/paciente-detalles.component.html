@@ -1,9 +1,9 @@
-<h1 class="titulo">Detalle del Paciente</h1>
-
 <div *ngIf="paciente" class="detalle-paciente">
+    <fieldset class="titulo">
+        <legend>Detalles del paciente</legend>
     <div class="detalle-item">
-        <label>ID:</label>
-        <span>{{ paciente.id }}</span>
+        <label>DNI:</label>
+        <span>{{ paciente.dni }}</span>
     </div>
     <div class="detalle-item">
         <label>Nombre:</label>
@@ -17,6 +17,15 @@
         <label>Cita:</label>
         <span>{{ paciente.cita }}</span>
     </div>
+    </fieldset>
+
+    <div class="center-container">
+        <button mat-raised-button
+                title="Editar paciente"
+                routerLink="/paciente/create/{{paciente.id}}">
+          <mat-icon>build</mat-icon>
+        </button>
+      </div>
 </div>
 
 <div *ngIf="!paciente" class="cargando">

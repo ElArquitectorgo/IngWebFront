@@ -1,11 +1,10 @@
 .titulo {
     color: #333;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .detalle-paciente {
-    border: 1px solid #ddd;
-    border-radius: 8px;
     padding: 20px;
     max-width: 400px;
     margin: auto;
@@ -29,3 +28,9 @@
     font-style: italic;
     color: #666;
 }
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

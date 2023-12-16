@@ -13,12 +13,13 @@ import { UsersService } from '../services/users.service';
 })
 export class HomeComponent implements OnInit  {
 
-  displayedColumns = ['id', 'dni', 'nombre', 'edad', 'cita'];
+  displayedColumns = ['id', 'nombre', 'dni', 'delete'];
   accounts: JSON[] =[];
   element = {};
   dataSource = new MatTableDataSource(this.accounts);
   login = false;
   id_medico: number | undefined;
+  isButtonHovered = false;
   
   constructor(private pacienteService: PacienteService,
     private userService: UsersService,
@@ -65,7 +66,8 @@ export class HomeComponent implements OnInit  {
     });
   }
 
-  confirmDeletion(id: number) {
+  confirmDeletion(event:Event, id: number) {
+    event.stopPropagation();
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '250px',
       data: { title: 'Paciente ' + id }
@@ -76,5 +78,13 @@ export class HomeComponent implements OnInit  {
         this.delete(id);
       }
     });
+  }
+
+  onMouseEnter(row: any): void {
+    row.isHovered = true;
+  }
+
+  onMouseLeave(row: any): void {
+    row.isHovered = false;
   }
 }
