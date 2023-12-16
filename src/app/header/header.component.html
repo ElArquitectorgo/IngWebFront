@@ -4,9 +4,6 @@
     </span>
     <button mat-button routerLink="/home">Home
         <mat-icon>dashboard</mat-icon> </button>
-    <button mat-button *ngIf="login" routerLink="/create">Pacientes
-        <mat-icon>face</mat-icon>
-    </button>
     <button mat-button *ngIf="login">{{medico.nombre.split(' ')[0]}}
         <mat-icon>account_circle</mat-icon>
     </button>

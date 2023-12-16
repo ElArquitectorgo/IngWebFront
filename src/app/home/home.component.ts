@@ -4,6 +4,7 @@ import { PacienteService } from '../services/paciente.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-home',
@@ -16,17 +17,27 @@ export class HomeComponent implements OnInit  {
   accounts: JSON[] =[];
   element = {};
   dataSource = new MatTableDataSource(this.accounts);
+  login = false;
+  id_medico: number | undefined;
   
   constructor(private pacienteService: PacienteService,
+    private userService: UsersService,
     private snackbar: MatSnackBar,
     public dialog: MatDialog) { }
     
   ngOnInit(): void {  
-    this.updateData();
+    if (this.userService.isLogin()) {
+      this.login = true;
+      this.updateData();
+    }else {
+      this.login = false;
+    }
   }
 
   updateData(){
-    this.pacienteService.getAccounts().subscribe({
+    this.id_medico = this.userService.getId();
+
+    this.pacienteService.getPacienteMedico(this.id_medico!).subscribe({
       next: (accounts: JSON[]) => {
         console.log(accounts);
         this.accounts = accounts;
@@ -38,7 +49,7 @@ export class HomeComponent implements OnInit  {
         });
       },
       complete: () => console.log('done'),
-    });
+    })
   }
   delete(id: number){
     this.pacienteService.deleteAccount(id).subscribe({

@@ -33,4 +33,8 @@ export class PacienteService {
     deleteAccount(id: number){
       return this.httpClient.delete(this.url + '/' + id)
     }
+
+    getPacienteMedico(id: number){
+      return this.httpClient.get<JSON[]>(this.url + '/medico/' + id);
+    }
 }
