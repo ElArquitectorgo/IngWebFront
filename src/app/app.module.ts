@@ -23,6 +23,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
+import { PacienteDetallesComponent } from './paciente-detalles/paciente-detalles.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { HeaderComponent } from './header/header.component';
     HomeComponent,
     LoginComponent,
     ConfirmDialogComponent,
+    PacienteDetallesComponent,
   ],
   imports: [
     BrowserModule,

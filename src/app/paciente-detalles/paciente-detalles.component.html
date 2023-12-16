@@ -1,0 +1,24 @@
+<h1 class="titulo">Detalle del Paciente</h1>
+
+<div *ngIf="paciente" class="detalle-paciente">
+    <div class="detalle-item">
+        <label>ID:</label>
+        <span>{{ paciente.id }}</span>
+    </div>
+    <div class="detalle-item">
+        <label>Nombre:</label>
+        <span>{{ paciente.nombre }}</span>
+    </div>
+    <div class="detalle-item">
+        <label>Edad:</label>
+        <span>{{ paciente.edad }}</span>
+    </div>
+    <div class="detalle-item">
+        <label>Cita:</label>
+        <span>{{ paciente.cita }}</span>
+    </div>
+</div>
+
+<div *ngIf="!paciente" class="cargando">
+    Cargando detalles del paciente...
+</div>

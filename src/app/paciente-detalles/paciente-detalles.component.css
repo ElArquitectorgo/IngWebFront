@@ -1,0 +1,31 @@
+.titulo {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.detalle-paciente {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 400px;
+    margin: auto;
+}
+
+.detalle-item {
+    margin-bottom: 10px;
+}
+
+.detalle-item label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.detalle-item span {
+    color: #555;
+}
+
+.cargando {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+}
