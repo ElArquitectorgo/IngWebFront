@@ -25,7 +25,20 @@
                 routerLink="/paciente/create/{{paciente.id}}">
           <mat-icon>build</mat-icon>
         </button>
+
+        <input type="file" #imageInput style="display: none;" (change)="uploadImage($event)" accept="image/*"/>
+        <button mat-raised-button title="Subir imagen" (click)="imageInput.click()">
+          <mat-icon>file_upload</mat-icon>
+        </button>
       </div>
+      <div class="image-grid">
+        <div *ngFor="let image of images" class="image-item">
+            <a [routerLink]="['/image-detail', image.id]">
+                <!-- Assuming image.path is the URL or path of the image -->
+                <img [src]="image.path" alt="Imagen del paciente" class="thumbnail-image">
+            </a>
+        </div>
+    </div>
 </div>
 
 <div *ngIf="!paciente" class="cargando">
