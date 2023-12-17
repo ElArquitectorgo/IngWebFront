@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
-import { Imagen } from '../imagen'; // Replace with the correct path to your Imagen model
-
+import { Imagen } from '../imagen'; 
 @Injectable({
   providedIn: 'root'
 })
@@ -42,5 +41,11 @@ export class ImageService {
 
   getImagesByPacienteId(id: number): Observable<Imagen[]> {
     return this.httpClient.get<Imagen[]>(`${this.url}/paciente/${id}`);
+  }
+
+
+  predictImage(imageId: number): Observable<any> {
+    // Replace with actual prediction API call or logic
+    return this.httpClient.post(this.baseUrl + '/predict', { imageId: imageId });
   }
 }

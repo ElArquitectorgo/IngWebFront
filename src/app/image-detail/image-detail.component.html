@@ -1,1 +1,23 @@
-<p>image-detail works!</p>
+<!-- image-detail.component.html -->
+<div class="image-detail-container">
+    <div class="image-container">
+      <img *ngIf="image" [src]="image.path" alt="Selected Image" />
+    </div>
+  
+    <div class="info-container">
+      <button mat-button (click)="predict()">Predict</button>
+      <div class="info-item">
+        <span class="info-label">Id:</span>
+        <span class="info-value">{{ predictedData.id }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Label1:</span>
+        <span class="info-value">{{ predictedData.label1 }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Label2:</span>
+        <span class="info-value">{{ predictedData.label2 }}</span>
+      </div>
+    </div>
+  </div>
+  
