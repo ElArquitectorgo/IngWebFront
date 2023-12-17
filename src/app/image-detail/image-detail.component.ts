@@ -1,4 +1,3 @@
-// image-detail.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ImageService } from '../services/image.service';
@@ -14,8 +13,10 @@ import { environment } from '../../environments/environment.development';
 })
 export class ImageDetailComponent implements OnInit {
   image: Imagen | null = null;
-  predictedData: any = {};
+  image_path: string = '';
+  predictedData: Informe = new Informe();
   informe: Informe | any = null;
+  userInput: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +36,7 @@ export class ImageDetailComponent implements OnInit {
   fetchImage(id: number): void {
     this.imageService.getImage(id).subscribe({
       next: (image) => {
-        image.path = `${environment.baseUrl}/images/${image.path}`;
+        this.image_path = `${environment.baseUrl}/images/${image.path}`;
         this.image = image;
         console.log("elements ",this.image );
 
@@ -50,18 +51,18 @@ export class ImageDetailComponent implements OnInit {
     this.informeService.getInformeImagen(imageId).subscribe({
       next: (informes) => {
         if (informes.length > 0) {
-          this.informe = informes[0]; // Assuming the first one is the relevant informe
+          this.informe = informes[0];
+          this.predictedData = this.informe;
+
         } else {
-          // Create a new Informe
           const newInforme: Informe = new Informe();
           newInforme.imagen = <Imagen> this.image
-          newInforme.contenido = "dddd";
-          newInforme.prediccion = "3222";
-          console.log("elements1 ",newInforme );
           
           this.informeService.createInforme(newInforme).subscribe({
             next: (createdInforme) => {
               this.informe = createdInforme;
+              this.predictedData = <Informe> createdInforme;
+              console.log("id: ", this.informe)
             },
             error: (error) => {
               console.error('Error creating informe:', error);
@@ -75,18 +76,48 @@ export class ImageDetailComponent implements OnInit {
     });
   }
 
+
+
   predict(): void {
-    // Prediction logic here
-    // For example, update predictedData based on the prediction result
-    // Also create a new Informe as required
-    const newInforme: Informe = new Informe;
-    newInforme.imagen = <Imagen>this.image;
-    this.informeService.createInforme(newInforme).subscribe({
-      next: (createdInforme) => {
-        // Update UI or state as necessary
+    if (!this.image || !this.informe) {
+      console.error('No image or informe selected for prediction');
+      return;
+    }
+  
+    
+    this.informeService.updateInforme(this.informe).subscribe({
+      next: (updatedInforme) => {
+        console.log('Informe updated successfully', updatedInforme);
+  
+        this.informeService.getInforme(this.informe.id).subscribe({
+          next: (fetchedInforme) => {
+            console.log(fetchedInforme)
+            this.predictedData = fetchedInforme as unknown as Informe;
+          },
+          error: (fetchError) => {
+            console.error('Error fetching updated informe:', fetchError);
+          }
+        });
+      },
+      error: (updateError) => {
+        console.error('Error updating informe:', updateError);
+      }
+    });
+  }
+
+  submitNote(): void {
+    if (!this.informe) {
+      console.error('Informe not found');
+      return;
+    }
+    this.informe.contenido = this.userInput;
+
+    this.informeService.updateInforme(this.informe).subscribe({
+      next: (updatedInforme) => {
+        console.log('Informe updated successfully', updatedInforme);
       },
       error: (error) => {
-        console.error('Error creating new informe:', error);
+        console.error('Error updating informe:', error);
       }
     });
   }

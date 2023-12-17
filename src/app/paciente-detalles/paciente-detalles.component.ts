@@ -15,6 +15,7 @@ import { environment } from '../../environments/environment.development';
 export class PacienteDetallesComponent implements OnInit {
   paciente: any; 
   images: Imagen[] = [];
+  imageID: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,33 +49,43 @@ export class PacienteDetallesComponent implements OnInit {
     });
   }
 
-  
   uploadImage(event: any): void {
     const file = event.target.files[0];
     
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        const imageUrl = e.target.result; 
-        const newImage = new Imagen();
-        newImage.path = imageUrl;
-        this.images.push(newImage);
+      const formData = new FormData();
+      formData.append('file', file, file.name);
+      formData.append('paciente', JSON.stringify(this.paciente));
   
-        const formData = new FormData();
-        formData.append('file', file, file.url);
-        formData.append('paciente', JSON.stringify(this.paciente));
-  
-        this.imageService.uploadImage(formData).subscribe({
-          next: (response) => {
-          },
-          error: (error) => {
-            console.error('Error uploading image:', error);
+      this.imageService.uploadImage(formData).subscribe({
+        next: (response) => {
+          // Assume response contains the new image data, including the ID
+          const imageId = response.id;
+          if (imageId) {
+            // Wait for a few seconds before fetching the image data
+            setTimeout(() => {
+              this.fetchNewImage(imageId);
+            }, 3000); // Delay of 3 seconds
           }
-        });
-      };
-      reader.readAsDataURL(file);
+        },
+        error: (error) => {
+          console.error('Error uploading image:', error);
+        }
+      });
     }
-  }
+}
+
+fetchNewImage(imageId: number): void {
+  this.imageService.getImage(imageId).subscribe({
+    next: (newImage) => {
+      newImage.path = `${environment.baseUrl}/images/${newImage.path}`;
+      this.images.push(newImage); // Add the fetched image to the array
+    },
+    error: (error) => {
+      console.error('Error fetching new image:', error);
+    }
+  });
+}
 
 
 }

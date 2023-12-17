@@ -1,23 +1,22 @@
-<!-- image-detail.component.html -->
 <div class="image-detail-container">
     <div class="image-container">
-      <img *ngIf="image" [src]="image.path" alt="Selected Image" />
+        <img *ngIf="image" [src]="image_path" alt="Selected Image" />
     </div>
-  
+
     <div class="info-container">
-      <button mat-button (click)="predict()">Predict</button>
-      <div class="info-item">
-        <span class="info-label">Id:</span>
-        <span class="info-value">{{ predictedData.id }}</span>
-      </div>
-      <div class="info-item">
-        <span class="info-label">Label1:</span>
-        <span class="info-value">{{ predictedData.label1 }}</span>
-      </div>
-      <div class="info-item">
-        <span class="info-label">Label2:</span>
-        <span class="info-value">{{ predictedData.label2 }}</span>
-      </div>
+        <button mat-button (click)="predict()">Predict</button>
+        <div class="info-item">
+            <span class="info-label">Id:</span>
+            <span class="info-value">{{ predictedData.id }}</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Prediction:</span>
+            <span class="info-value">{{ predictedData.prediccion }}</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Note:</span>
+            <textarea [(ngModel)]="userInput" rows="3" cols="30" placeholder="{{ predictedData.contenido }}"></textarea>
+            <button mat-button (click)="submitNote()">Submit</button>
+        </div>
     </div>
-  </div>
-  
+</div>
