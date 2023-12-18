@@ -22,6 +22,7 @@ export class ImageService {
 
 
   getImage(id: number): Observable<Imagen> {
+    console.log(`${this.url}/${id}`);
     return this.httpClient.get<Imagen>(`${this.url}/${id}`);
   }
 
@@ -47,5 +48,9 @@ export class ImageService {
   predictImage(imageId: number): Observable<any> {
     // Replace with actual prediction API call or logic
     return this.httpClient.post(this.baseUrl + '/predict', { imageId: imageId });
+  }
+
+  getImageInfo(imageId: number): Observable<any> {
+    return this.httpClient.get(this.baseUrl + '/imagen/info/' + imageId);
   }
 }

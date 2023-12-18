@@ -12,11 +12,11 @@ import { environment } from '../../environments/environment.development';
   styleUrls: ['./image-detail.component.css']
 })
 export class ImageDetailComponent implements OnInit {
-  image: Imagen | null = null;
-  image_path: string = '';
+  image: Imagen = new Imagen();
   predictedData: Informe = new Informe();
   informe: Informe | any = null;
   userInput: string = '';
+  id_imagen: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,17 +27,17 @@ export class ImageDetailComponent implements OnInit {
   ngOnInit(): void {
     const imageId = this.route.snapshot.paramMap.get('id');
     if (imageId) {
-      const id = parseInt(imageId, 10);
-      this.fetchImage(id);
-      this.fetchOrCreateInforme(id);
+      this.id_imagen = parseInt(imageId, 10);
+      this.fetchImage(this.id_imagen);
+      this.fetchOrCreateInforme(this.id_imagen);
     }
   }
 
   fetchImage(id: number): void {
-    this.imageService.getImage(id).subscribe({
+    this.imageService.getImageInfo(id).subscribe({
       next: (image) => {
-        this.image_path = `${environment.baseUrl}/images/${image.path}`;
         this.image = image;
+        this.image.path = `${environment.baseUrl}/imagen/${this.image.id}`
         console.log("elements ",this.image );
 
       },
@@ -79,12 +79,6 @@ export class ImageDetailComponent implements OnInit {
 
 
   predict(): void {
-    if (!this.image || !this.informe) {
-      console.error('No image or informe selected for prediction');
-      return;
-    }
-  
-    
     this.informeService.updateInforme(this.informe).subscribe({
       next: (updatedInforme) => {
         console.log('Informe updated successfully', updatedInforme);

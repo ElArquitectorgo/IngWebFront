@@ -16,6 +16,7 @@ export class PacienteDetallesComponent implements OnInit {
   paciente: any; 
   images: Imagen[] = [];
   imageID: number = 0;
+  url: string = environment.baseUrl + "/imagen/";
 
   constructor(
     private route: ActivatedRoute,
@@ -39,7 +40,7 @@ export class PacienteDetallesComponent implements OnInit {
     this.imageService.getImagesByPacienteId(this.paciente.id).subscribe({
       next: (images: Imagen[]) => {
         this.images = images.map(image => {
-          image.path = `${environment.baseUrl}/images/${image.path}`;
+          image.path = `${environment.baseUrl}/imagen/${image.id}`;
           return image;
         });
       },
@@ -54,8 +55,8 @@ export class PacienteDetallesComponent implements OnInit {
     
     if (file) {
       const formData = new FormData();
-      formData.append('file', file, file.name);
-      formData.append('paciente', JSON.stringify(this.paciente));
+      formData.append('image', file, file.name);
+      formData.append('paciente', this.paciente.id);
   
       this.imageService.uploadImage(formData).subscribe({
         next: (response) => {
@@ -65,11 +66,13 @@ export class PacienteDetallesComponent implements OnInit {
             // Wait for a few seconds before fetching the image data
             setTimeout(() => {
               this.fetchNewImage(imageId);
+              this.fetchImages();
             }, 3000); // Delay of 3 seconds
           }
         },
         error: (error) => {
           console.error('Error uploading image:', error);
+          this.fetchImages();
         }
       });
     }
