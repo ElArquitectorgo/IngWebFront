@@ -46,3 +46,29 @@
     object-fit: cover; 
   }
   
+
+  mat-list-item {
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+  }
+  
+  mat-list-item:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
+  }
+  
+  .list-item-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .icon-container, .text-container, .button-container {
+    margin-right: 8px;
+  }
+  
+  .button-container {
+    margin-left: auto; /* Mueve el contenedor del botón al final de la línea */
+  }
+  

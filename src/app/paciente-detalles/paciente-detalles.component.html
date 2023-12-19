@@ -44,3 +44,24 @@
 <div *ngIf="!paciente" class="cargando">
   Cargando detalles del paciente...
 </div>
+
+  
+<mat-list #listaImagenes>
+  <mat-list-item *ngFor="let image of images" (click)="goToImage(image.id)">
+    <div class="list-item-content">
+      <div class="icon-container">
+        <mat-icon matListItemIcon>folder</mat-icon>
+      </div>
+      <div class="text-container">
+        <span>Informe del {{image.fecha.split('T')[0]}}</span>
+      </div>
+      <div class="button-container">
+        <button mat-icon-button title="Borrar paciente" (click)="deleteImage($event)">
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-list-item>
+</mat-list>
+
+

@@ -4,9 +4,7 @@ import { PacienteService } from '../services/paciente.service';
 import { ImageService } from '../services/image.service';
 import { Imagen } from '../imagen'; 
 import { environment } from '../../environments/environment.development';
-import { getLocaleDateFormat, getLocaleDateTimeFormat } from '@angular/common';
-
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-paciente-detalles',
@@ -21,6 +19,7 @@ export class PacienteDetallesComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private pacienteService: PacienteService,
     private imageService: ImageService,
   ) { }
@@ -77,19 +76,28 @@ export class PacienteDetallesComponent implements OnInit {
         }
       });
     }
-}
+  }
 
-fetchNewImage(imageId: number): void {
-  this.imageService.getImage(imageId).subscribe({
-    next: (newImage) => {
-      newImage.path = `${environment.baseUrl}/images/${newImage.path}`;
-      this.images.push(newImage); // Add the fetched image to the array
-    },
-    error: (error) => {
-      console.error('Error fetching new image:', error);
-    }
-  });
-}
+  fetchNewImage(imageId: number): void {
+    this.imageService.getImage(imageId).subscribe({
+      next: (newImage) => {
+        newImage.path = `${environment.baseUrl}/images/${newImage.path}`;
+        this.images.push(newImage); // Add the fetched image to the array
+      },
+      error: (error) => {
+        console.error('Error fetching new image:', error);
+      }
+    });
+  }
+
+  goToImage(imageId: number | undefined): void {
+    this.router.navigate(['/image-detail', imageId]);
+  }
+
+  deleteImage(event: Event): void {
+    console.log("Nada por aquí");
+    event.stopPropagation();
+  }
 
 
 }
