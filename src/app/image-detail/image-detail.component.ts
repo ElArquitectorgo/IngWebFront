@@ -13,10 +13,11 @@ import { environment } from '../../environments/environment.development';
 })
 export class ImageDetailComponent implements OnInit {
   image: Imagen = new Imagen();
-  predictedData: Informe = new Informe();
+  //predictedData: Informe = new Informe();
+  predictedData: string = '';
   informe: Informe | any = null;
   userInput: string = '';
-  id_imagen: number = 0;
+  idImagen: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,9 +28,9 @@ export class ImageDetailComponent implements OnInit {
   ngOnInit(): void {
     const imageId = this.route.snapshot.paramMap.get('id');
     if (imageId) {
-      this.id_imagen = parseInt(imageId, 10);
-      this.fetchImage(this.id_imagen);
-      this.fetchOrCreateInforme(this.id_imagen);
+      this.idImagen = parseInt(imageId, 10);
+      this.fetchImage(this.idImagen);
+      this.fetchOrCreateInforme(this.idImagen);
     }
   }
 
@@ -52,7 +53,7 @@ export class ImageDetailComponent implements OnInit {
       next: (informes) => {
         if (informes.length > 0) {
           this.informe = informes[0];
-          this.predictedData = this.informe;
+          //this.predictedData = this.informe;
 
         } else {
           const newInforme: Informe = new Informe();
@@ -61,7 +62,8 @@ export class ImageDetailComponent implements OnInit {
           this.informeService.createInforme(newInforme).subscribe({
             next: (createdInforme) => {
               this.informe = createdInforme;
-              this.predictedData = <Informe> createdInforme;
+              //this.predictedData = <Informe> createdInforme;
+              this.predictedData = '';
               console.log("id: ", this.informe)
             },
             error: (error) => {
@@ -79,7 +81,8 @@ export class ImageDetailComponent implements OnInit {
 
 
   predict(): void {
-    this.informeService.updateInforme(this.informe).subscribe({
+    this.predictedData = Math.random().toString();
+    /*this.informeService.updateInforme(this.informe).subscribe({
       next: (updatedInforme) => {
         console.log('Informe updated successfully', updatedInforme);
   
@@ -96,7 +99,7 @@ export class ImageDetailComponent implements OnInit {
       error: (updateError) => {
         console.error('Error updating informe:', updateError);
       }
-    });
+    });*/
   }
 
   submitNote(): void {

@@ -1,46 +1,46 @@
 <div *ngIf="paciente" class="detalle-paciente">
-    <fieldset class="titulo">
-        <legend>Detalles del paciente</legend>
-    <div class="detalle-item">
-        <label>DNI:</label>
-        <span>{{ paciente.dni }}</span>
-    </div>
-    <div class="detalle-item">
-        <label>Nombre:</label>
-        <span>{{ paciente.nombre }}</span>
-    </div>
-    <div class="detalle-item">
-        <label>Edad:</label>
-        <span>{{ paciente.edad }}</span>
-    </div>
-    <div class="detalle-item">
-        <label>Cita:</label>
-        <span>{{ paciente.cita }}</span>
-    </div>
-    </fieldset>
+<fieldset class="titulo">
+    <legend>Detalles del paciente</legend>
+<div class="detalle-item">
+    <label>DNI: </label>
+    <span>{{ paciente.dni }}</span>
+</div>
+<div class="detalle-item">
+    <label>Nombre: </label>
+    <span>{{ paciente.nombre }}</span>
+</div>
+<div class="detalle-item">
+    <label>Edad: </label>
+    <span>{{ paciente.edad }}</span>
+</div>
+<div class="detalle-item">
+    <label>Cita: </label>
+    <span>{{ paciente.cita }}</span>
+</div>
+</fieldset>
 
-    <div class="center-container">
-        <button mat-raised-button
-                title="Editar paciente"
-                routerLink="/paciente/create/{{paciente.id}}">
-          <mat-icon>build</mat-icon>
-        </button>
+<div class="center-container">
+    <button mat-raised-button
+            title="Editar paciente"
+            routerLink="/paciente/create/{{paciente.id}}">
+      <mat-icon>build</mat-icon>
+    </button>
 
-        <input type="file" #imageInput style="display: none;" (change)="uploadImage($event)" accept="image/*"/>
-        <button mat-raised-button title="Subir imagen" (click)="imageInput.click()">
-          <mat-icon>file_upload</mat-icon>
-        </button>
-      </div>
-      <div class="image-grid">
-        <div *ngFor="let image of images" class="image-item">
-          <a [routerLink]="['/image-detail', image.id]">
-            <img [src]="image.path" alt="Imagen del paciente" class="thumbnail-image">
-          </a>
-        </div>
-      </div>
-    
+    <input type="file" #imageInput style="display: none;" (change)="uploadImage($event)" accept="image/*"/>
+    <button mat-raised-button title="Subir imagen" (click)="imageInput.click()">
+      <mat-icon>file_upload</mat-icon>
+    </button>
+  </div>
+  <div class="image-grid">
+    <div *ngFor="let image of images" class="image-item">
+      <a [routerLink]="['/image-detail', image.id]">
+        <img [src]="image.path" alt="Imagen del paciente" class="thumbnail-image">
+      </a>
     </div>
-    
-    <div *ngIf="!paciente" class="cargando">
-      Cargando detalles del paciente...
-    </div>
+  </div>
+
+</div>
+
+<div *ngIf="!paciente" class="cargando">
+  Cargando detalles del paciente...
+</div>

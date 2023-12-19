@@ -6,16 +6,16 @@
     <div class="info-container">
         <button mat-button (click)="predict()">Predict</button>
         <div class="info-item">
-            <span class="info-label">Id:</span>
-            <span class="info-value">{{ predictedData.id }}</span>
+            <span class="info-label">Id: </span>
+            <span class="info-value">{{ image.fecha.split('T')[0] }}</span>
         </div>
         <div class="info-item">
-            <span class="info-label">Prediction:</span>
-            <span class="info-value">{{ predictedData.prediccion }}</span>
+            <span class="info-label">Prediction: </span>
+            <span class="info-value">{{ predictedData }}</span>
         </div>
         <div class="info-item">
-            <span class="info-label">Note:</span>
-            <textarea [(ngModel)]="userInput" rows="3" cols="30" placeholder="{{ predictedData.contenido }}"></textarea>
+            <span class="info-label">Note: </span>
+            <textarea [(ngModel)]="userInput" rows="3" cols="30" placeholder="Hola"></textarea>
             <button mat-button (click)="submitNote()">Submit</button>
         </div>
     </div>

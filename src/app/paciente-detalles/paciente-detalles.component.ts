@@ -4,6 +4,7 @@ import { PacienteService } from '../services/paciente.service';
 import { ImageService } from '../services/image.service';
 import { Imagen } from '../imagen'; 
 import { environment } from '../../environments/environment.development';
+import { getLocaleDateFormat, getLocaleDateTimeFormat } from '@angular/common';
 
 
 
