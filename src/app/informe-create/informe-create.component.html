@@ -1,13 +1,20 @@
-<div class="informe-create-container">
-    <button mat-raised-button *ngIf="!predicted" (click)="predict()">Predecir</button>
-    <div *ngIf="predicted">
-        Probabilidad de cáncer: {{ prediction }}
+<div class="informe-create-container" style="font-family: Arial, sans-serif; max-width: 800px; margin: auto;">
+
+    <div class="center-content">
+        <button mat-raised-button *ngIf="!predicted" (click)="predict()" class="predict-button">Predecir</button>
     </div>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Ingrese sus comentarios</mat-label>
+    <div *ngIf="predicted" class="center-content result">
+        <span style="font-weight: bold;">Probabilidad de cáncer:</span> {{ prediction }}
+    </div>
+
+    <mat-form-field appearance="fill" class="text-field">
+        <mat-label>Informe médico</mat-label>
         <textarea matInput [(ngModel)]="informeText"></textarea>
     </mat-form-field>
 
-    <button mat-raised-button (click)="saveInforme()">Guardar</button>
+    <div class="center-content">
+        <button mat-raised-button (click)="saveInforme()" class="save-button">Guardar</button>
+    </div>
+
 </div>

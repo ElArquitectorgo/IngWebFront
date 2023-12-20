@@ -32,18 +32,20 @@ export class InformeCreateComponent implements OnInit {
     // Obtener el ID de la imagen de los parámetros de la ruta
     this.route.paramMap.subscribe(params => {
       this.imageId = Number(params.get('id'));
+      this.fetchImage(this.imageId);
     });
   }
 
   predict() {
     // Generar un número aleatorio para la predicción y marcar como predecido
-    this.prediction = Math.floor(Math.random());
+    this.prediction = Math.random();
     this.predicted = true;
   }
   fetchImage(id: number): void {
     this.imageService.getImageInfo(id).subscribe({
       next: (image) => {
         this.image = image;
+
       },
       error: (error) => {
         console.error('Error fetching image:', error);
@@ -55,7 +57,6 @@ export class InformeCreateComponent implements OnInit {
     this.informe = new Informe();
     this.informe.prediccion = this.prediction? this.prediction.toString() : '';
     this.informe.contenido = this.informeText;
-    this.fetchImage(this.imageId);
     this.informe.imagen = this.image;
 
 
