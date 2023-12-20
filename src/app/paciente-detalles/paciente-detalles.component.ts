@@ -3,15 +3,24 @@ import { ActivatedRoute } from '@angular/router';
 import { PacienteService } from '../services/paciente.service';
 import { ImageService } from '../services/image.service';
 import { Imagen } from '../imagen'; 
+import {animate, state, style, transition, trigger} from '@angular/animations';
 import { environment } from '../../environments/environment.development';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-paciente-detalles',
   templateUrl: './paciente-detalles.component.html',
-  styleUrls: ['./paciente-detalles.component.css']
+  styleUrls: ['./paciente-detalles.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed,void', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class PacienteDetallesComponent implements OnInit {
   paciente: any; 
@@ -21,12 +30,15 @@ export class PacienteDetallesComponent implements OnInit {
   displayedColumns: string[] = ['icon', 'date', 'deleteButton'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource = new MatTableDataSource<any>(this.images);
+  columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
+  expandedElement!: Imagen | null;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private pacienteService: PacienteService,
     private imageService: ImageService,
+    private snackbar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -108,8 +120,17 @@ export class PacienteDetallesComponent implements OnInit {
     this.router.navigate(['/image-detail', imageId]);
   }
 
-  deleteImage(event: Event): void {
-    console.log("Nada por aquí");
-    event.stopPropagation();
+  deleteImage(id: number){
+    this.imageService.deleteImage(id).subscribe({
+      next: () => {
+        this.fetchImages();
+      },
+      error: (e: any) => {
+        this.snackbar.open('Error deleting the paciente '+e.error, '', {
+          duration: 3000
+        });
+      },
+      complete: () => console.log('done'),
+    });
   }
 }
