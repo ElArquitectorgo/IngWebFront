@@ -30,6 +30,7 @@ import { PacienteDetallesComponent } from './paciente-detalles/paciente-detalles
 import { PacienteCreateComponent } from './paciente-create/paciente-create.component';
 import { ImageDetailComponent } from './image-detail/image-detail.component';
 import { MedicoDetallesComponent } from './medico-detalles/medico-detalles.component';
+import { InformeCreateComponent } from './informe-create/informe-create.component'; 
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { MedicoDetallesComponent } from './medico-detalles/medico-detalles.compo
     PacienteCreateComponent,
     ImageDetailComponent,
     MedicoDetallesComponent,
+    InformeCreateComponent,
   ],
   imports: [
     BrowserModule,
