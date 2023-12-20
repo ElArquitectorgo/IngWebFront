@@ -27,7 +27,7 @@ export class PacienteDetallesComponent implements OnInit {
   images: Imagen[] = [];
   imageID: number = 0;
   url: string = environment.baseUrl + "/imagen/";
-  displayedColumns: string[] = ['icon', 'date', 'deleteButton'];
+  displayedColumns: string[] = ['see', 'icon', 'date', 'deleteButton'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource = new MatTableDataSource<any>(this.images);
   columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
