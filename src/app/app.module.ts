@@ -18,8 +18,9 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-
+import {MatSliderModule} from '@angular/material/slider';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatSortModule } from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -61,6 +62,8 @@ import { MedicoDetallesComponent } from './medico-detalles/medico-detalles.compo
     MatDialogModule,
     MatListModule,
     MatPaginatorModule,
+    MatSortModule,
+    MatSliderModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

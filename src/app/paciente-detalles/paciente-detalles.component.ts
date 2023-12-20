@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PacienteService } from '../services/paciente.service';
 import { ImageService } from '../services/image.service';
 import { Imagen } from '../imagen'; 
 import { environment } from '../../environments/environment.development';
 import { Router } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-paciente-detalles',
@@ -16,6 +18,9 @@ export class PacienteDetallesComponent implements OnInit {
   images: Imagen[] = [];
   imageID: number = 0;
   url: string = environment.baseUrl + "/imagen/";
+  displayedColumns: string[] = ['icon', 'date', 'deleteButton'];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  dataSource = new MatTableDataSource<any>(this.images);
 
   constructor(
     private route: ActivatedRoute,
@@ -26,14 +31,17 @@ export class PacienteDetallesComponent implements OnInit {
 
   ngOnInit(): void {
     const pacienteId = this.route.snapshot.paramMap.get('id');
+
     if (pacienteId) {
-      this.pacienteService.getAccount(+pacienteId).subscribe(paciente => {
-        
+      this.pacienteService.getAccount(+pacienteId).subscribe(paciente => {  
         this.paciente = paciente;
         this.fetchImages();
-       
       });
     }
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   fetchImages(): void {
@@ -43,6 +51,12 @@ export class PacienteDetallesComponent implements OnInit {
           image.path = `${environment.baseUrl}/imagen/${image.id}`;
           return image;
         });
+        this.images.sort((a, b) => {
+          const idA = a.id || 0; // Si a.id es undefined o null, asigna 0
+          const idB = b.id || 0; // Si b.id es undefined o null, asigna 0
+          return idB - idA;
+        });
+        this.dataSource.data = this.images;
       },
       error: (error) => {
         console.error('Error fetching images:', error);
@@ -98,6 +112,4 @@ export class PacienteDetallesComponent implements OnInit {
     console.log("Nada por aquí");
     event.stopPropagation();
   }
-
-
 }
