@@ -13,6 +13,7 @@ import {MatSnackBarModule, MatSnackBar} from '@angular/material/snack-bar';
 import { HomeComponent } from './home/home.component'; 
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import {MatListModule} from '@angular/material/list'; 
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -57,8 +58,9 @@ import { ImageDetailComponent } from './image-detail/image-detail.component';
     MatCardModule,
     MatDialogModule,
     MatListModule,
+    MatPaginatorModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

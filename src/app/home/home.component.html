@@ -31,8 +31,7 @@
     [routerLink]="['/paciente', row.id]"
     class="clickable-row"
     (mouseenter)="onMouseEnter(row)"
-    (mouseleave)="onMouseLeave(row)"
-    [ngStyle]="{ 'background-color': row.isHovered ? 'lightgray' : '' }">
+    (mouseleave)="onMouseLeave(row)">
     </mat-row>
 </mat-table>
 
