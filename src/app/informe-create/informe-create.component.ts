@@ -37,17 +37,13 @@ export class InformeCreateComponent implements OnInit {
 
   predict() {
     // Generar un número aleatorio para la predicción y marcar como predecido
-    this.prediction = Math.floor(Math.random() * 100);
+    this.prediction = Math.floor(Math.random());
     this.predicted = true;
   }
   fetchImage(id: number): void {
     this.imageService.getImageInfo(id).subscribe({
       next: (image) => {
         this.image = image;
-        this.image.path = `${environment.baseUrl}/imagen/${this.image.id}`
-        console.log("elements ",this.image );
-        this.image.hasInforme();
-
       },
       error: (error) => {
         console.error('Error fetching image:', error);
@@ -59,7 +55,9 @@ export class InformeCreateComponent implements OnInit {
     this.informe = new Informe();
     this.informe.prediccion = this.prediction? this.prediction.toString() : '';
     this.informe.contenido = this.informeText;
-    this.informe.imagen = this.fetchImage(this.imageId);
+    this.fetchImage(this.imageId);
+    this.informe.imagen = this.image;
+
 
 
     // Guardar el informe usando el servicio
