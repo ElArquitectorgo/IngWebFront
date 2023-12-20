@@ -27,6 +27,7 @@ import { HeaderComponent } from './header/header.component';
 import { PacienteDetallesComponent } from './paciente-detalles/paciente-detalles.component';
 import { PacienteCreateComponent } from './paciente-create/paciente-create.component';
 import { ImageDetailComponent } from './image-detail/image-detail.component';
+import { MedicoDetallesComponent } from './medico-detalles/medico-detalles.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ImageDetailComponent } from './image-detail/image-detail.component';
     PacienteDetallesComponent,
     PacienteCreateComponent,
     ImageDetailComponent,
+    MedicoDetallesComponent,
   ],
   imports: [
     BrowserModule,
