@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-paciente-detalles',
@@ -39,6 +42,7 @@ export class PacienteDetallesComponent implements OnInit {
     private pacienteService: PacienteService,
     private imageService: ImageService,
     private snackbar: MatSnackBar,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -131,6 +135,20 @@ export class PacienteDetallesComponent implements OnInit {
         });
       },
       complete: () => console.log('done'),
+    });
+  }
+
+  confirmDeletion(event:Event, id: number) {
+    event.stopPropagation();
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '250px',
+      data: { title: 'imagen ' + id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteImage(id);
+      }
     });
   }
 }

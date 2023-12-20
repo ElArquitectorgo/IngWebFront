@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit  {
   dataSource = new MatTableDataSource(this.accounts);
   login = false;
   id_medico: number | undefined;
-  isButtonHovered = false;
   
   constructor(private pacienteService: PacienteService,
     private userService: UsersService,
@@ -78,13 +77,5 @@ export class HomeComponent implements OnInit  {
         this.delete(id);
       }
     });
-  }
-
-  onMouseEnter(row: any): void {
-    row.isHovered = true;
-  }
-
-  onMouseLeave(row: any): void {
-    row.isHovered = false;
   }
 }

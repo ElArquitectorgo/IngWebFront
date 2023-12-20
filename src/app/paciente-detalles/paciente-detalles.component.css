@@ -73,6 +73,9 @@ tr.example-detail-row {
   height: 0;
 }
 
+.example-element-row {
+  transition: background-color 0.3s;
+}
 tr.example-element-row:not(.example-expanded-row):hover {
   background: whitesmoke;
 }
@@ -97,12 +100,7 @@ tr.example-element-row:not(.example-expanded-row):active {
   font-weight: lighter;
   margin: 8px 0;
   height: 104px;
-}
-
-.example-element-symbol {
-  font-weight: bold;
-  font-size: 40px;
-  line-height: normal;
+  cursor: pointer;
 }
 
 .example-element-description {
