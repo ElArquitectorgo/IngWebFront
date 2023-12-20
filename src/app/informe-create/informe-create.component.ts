@@ -38,7 +38,7 @@ export class InformeCreateComponent implements OnInit {
 
   predict() {
     // Generar un número aleatorio para la predicción y marcar como predecido
-    this.prediction = Math.floor(Math.random());
+    this.prediction = Math.random();
     this.predicted = true;
   }
   fetchImage(id: number): void {
