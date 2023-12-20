@@ -66,7 +66,7 @@ export class InformeCreateComponent implements OnInit {
     this.informeService.createInforme(this.informe).subscribe({
       next: () => {
         // Redireccionar al usuario a la página de detalles de la imagen
-        this.router.navigate(['/image/detail', this.imageId]);
+        this.router.navigate(['/image-detail', this.imageId]);
       },
       error: (error) => {
         console.error('Error al guardar el informe:', error);
