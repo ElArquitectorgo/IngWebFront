@@ -4,13 +4,15 @@
     </span>
     <button mat-button routerLink="/home">Pacientes
         <mat-icon>dashboard</mat-icon> </button>
+    <div class="boton-derecho">
     <button mat-button *ngIf="!login"  routerLink="/">Login
         <mat-icon>login</mat-icon>
     </button>
-    <button mat-button *ngIf="login" routerLink="/" (click)="logout()">Logout
+    <button mat-button  *ngIf="login" routerLink="/" (click)="logout()">Logout
         <mat-icon>logout</mat-icon>
     </button>
-    <button class="boton-derecho" mat-button *ngIf="login" routerLink="/medico">{{medico.nombre.split(' ')[0]}}
+    <button mat-button *ngIf="login" routerLink="/medico">{{medico.nombre.split(' ')[0]}}
         <mat-icon>account_circle</mat-icon>
     </button>
+    </div>
 </mat-toolbar>

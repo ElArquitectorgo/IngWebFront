@@ -6,7 +6,6 @@
 .image-container {
   width: 30%; /* Adjusted from 60% to 30% */
   margin-right: 250px;
-  margin-top: 80px;
 }
 
 .image-container img {
@@ -49,3 +48,4 @@ button {
 .underline {
   text-decoration: underline;
 }
+

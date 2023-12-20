@@ -1,33 +1,11 @@
-<!---
-<div class="image-detail-container">
-    <img class="imagen-container" [src]="image.path" alt="Selected Image">
-
-    <div *ngIf="!isInforme" class="info-container">
-        <button mat-raised-button title="Añadir informe" routerLink="/paciente/create" class="add-button">
-           <mat-icon>add</mat-icon>
-        </button>
-    </div>
-    <div *ngIf="isInforme" class="info-container">
-        <div class="info-item">
-            <span class="info-label">Id: </span>
-            <span class="info-value">{{ image.fecha.split('T')[0] }}</span>
-        </div>
-        <div class="info-item">
-            <span class="info-label">Prediction: </span>
-            <span class="info-value">{{ informe.prediccion }}</span>
-        </div>
-        <div class="info-item">
-            <span class="info-label">Note: </span>
-            <textarea [(ngModel)]="userInput" rows="3" cols="30" placeholder="Hola"></textarea>
-            <button mat-button>Submit</button>
-        </div>
-    </div>    
-</div>
--->
-
 <div class="image-detail-container">
     <div class="image-container">
+        <h1>Paciente: {{ image.paciente.nombre }}</h1>
         <img [src]="image.path" alt="Selected Image" />
+        <button mat-raised-button title="Volver al paciente" routerLink="/paciente/{{ image.paciente.id }}" 
+            class="add-button">
+                Volver al paciente
+            </button>
     </div>
 
     <div class="info-container">
