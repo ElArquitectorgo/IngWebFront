@@ -5,7 +5,7 @@
 }
 
 .add-button {
-  background-color: rgb(255, 101, 109);
+  background-color: #ff4081;
   color: white;
   font-size: 16px;
   width: 150px;
@@ -15,12 +15,11 @@
   justify-content: center;
 }
 
-mat-row:hover {
+.clickable-row:hover {
   background-color: #efefef;
   cursor: pointer;
 }
-  
-mat-row {
+
+.clickable-row {
   transition: background-color 0.3s;
 }
-

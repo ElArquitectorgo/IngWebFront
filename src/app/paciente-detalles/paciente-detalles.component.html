@@ -20,19 +20,17 @@
 </fieldset>
 
 <div class="center-container">
-    <button mat-raised-button
+    <button mat-icon-button
             title="Editar paciente"
             routerLink="/paciente/create/{{paciente.id}}">
       <mat-icon>edit</mat-icon>
     </button>
 
     <input type="file" #imageInput style="display: none;" (change)="uploadImage($event)" accept="image/*"/>
-    <button mat-raised-button title="Subir imagen" (click)="imageInput.click()">
+    <button mat-icon-button title="Subir imagen" (click)="imageInput.click()">
       <mat-icon>file_upload</mat-icon>
     </button>
   </div>
-
-
 </div>
 
 
